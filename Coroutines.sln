@@ -1,0 +1,23 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coroutines", "Coroutines\Coroutines.csproj", "{8472B453-C87B-4BF1-959D-58A8C8D2D784}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Coroutines.Test", "Coroutines.Test\Coroutines.Test.csproj", "{1829DBFF-70F3-43D5-B971-9530D97C41F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1829DBFF-70F3-43D5-B971-9530D97C41F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1829DBFF-70F3-43D5-B971-9530D97C41F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1829DBFF-70F3-43D5-B971-9530D97C41F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1829DBFF-70F3-43D5-B971-9530D97C41F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8472B453-C87B-4BF1-959D-58A8C8D2D784}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8472B453-C87B-4BF1-959D-58A8C8D2D784}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8472B453-C87B-4BF1-959D-58A8C8D2D784}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8472B453-C87B-4BF1-959D-58A8C8D2D784}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
