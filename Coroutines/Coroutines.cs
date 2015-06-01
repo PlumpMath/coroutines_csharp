@@ -5,20 +5,32 @@ namespace Coroutines
 {
 	public static class Extensions {
 
+		/*
+		 * Executes the next job in the pipeline, and returns it once it finishes.
+		 * */
+		public static Job DoWork(this IEnumerator<Job> jobs) {
+			jobs.MoveNext ();
+			return jobs.Current;
+		}
+
 		// Performs all of the work in the jobs
-		public static IList<object> DoWork(this IEnumerable<Job> jobs) {
+		public static IList<object> DoAllWork(this IEnumerator<Job> jobs) {
 			IList<object> work = new List<object> ();
-			foreach (Job job in jobs) {
-				work.Add (job.CurrentValue);
+			while(jobs.MoveNext()) {
+				work.Add (jobs.Current);
 			}
 
 			return work;
 		}
 
+		public static IEnumerator<Job> ToJobs(this IEnumerable<CoRoutine> coroutines) {
+			return coroutines.GetJobs ().GetEnumerator ();
+		}
+
 		// Executes a list of coroutines, and returns all of their jobs
 		// you must iterate over all the jobs in order for them to be
 		// executed
-		public static IEnumerable<Job> ToJobs(this IEnumerable<CoRoutine> coroutines) {
+		private static IEnumerable<Job> GetJobs(this IEnumerable<CoRoutine> coroutines) {
 			// A batch is executed as a single unit
 			// So a batch of batches would execute one complete batch at a time
 			CoRoutineBatch batch = new CoRoutineBatch (coroutines);
@@ -63,21 +75,21 @@ namespace Coroutines
 			private set;
 		}
 
-		public object CurrentValue {
+		public object Result {
 			get;
 			private set;
 		}
 
 		public static Job Done(object result) {
-			return new Job { Progress = Progress.Done, CurrentValue = result };
+			return new Job { Progress = Progress.Done, Result = result };
 		}
 
 		public static Job InProgress(object result) {
-			return new Job { Progress = Progress.InProgress, CurrentValue = result };
+			return new Job { Progress = Progress.InProgress, Result = result };
 		}
 
 		public static Job Failed(Exception exception) {
-			return new Job { Progress = Progress.Failed, CurrentValue = exception };
+			return new Job { Progress = Progress.Failed, Result = exception };
 		}
 	}
 
@@ -116,7 +128,7 @@ namespace Coroutines
 		{
 			foreach(CoRoutine routine in routines) {
 				foreach (Job job in routine.execute()) {
-					yield return Job.InProgress (job.CurrentValue);
+					yield return Job.InProgress (job.Result);
 				}
 			}
 
