@@ -40,7 +40,7 @@ namespace Coroutines.Test
 			Job nullableJob = jobs.DoWork();
 	
 			// Then
-			Assert.AreEqual (0, count); // There is no fnal job, the count should not increase
+			Assert.AreEqual (2, count); // There is no fnal job, the count should not increase
 			Assert.AreEqual (Job.NONE, nullableJob.Result);
 			Assert.AreEqual (Progress.Done, nullableJob.Progress);
 		}
